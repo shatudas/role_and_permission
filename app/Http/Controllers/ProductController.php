@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -24,7 +25,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+
+        $products = Product::latest()->paginate(5);
+        return view('backend.product.index',compact('products'))->with('i', (request()->input('page', 1) - 1) *5 );
+
     }
 
     /**
@@ -34,7 +38,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('backend.product.create');
+
     }
 
     /**
@@ -45,7 +51,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request()->validate([
+            'name'   =>'required',
+            'detail' =>'required'
+        ]);
+
+        Product::create($request->all());
+
+        return redirect()->route('products.index')->with('success','Product Added Successfully');
+
     }
 
     /**
@@ -54,9 +69,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $products)
     {
-        //
+
+        return view('backend.product.show',compact('product'));
+
     }
 
     /**
@@ -65,10 +82,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+
+        return view('backend.product.edit',compact('product'));
+
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -77,9 +97,20 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+
+    public function update(Request $request, Product $product)
     {
-        //
+
+        $request()->validate([
+            'name'   =>'required',
+            'detail' =>'required'
+        ]);
+
+        $product->update($request->all());
+
+        return redirect()->route('products.index')->with('success','Product Updated Successfully');
+
     }
 
     /**
@@ -88,8 +119,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+
+        $product->delete();
+
+        return view('products.index')->with('success', 'Product Deleted Successfully');
+
     }
+
+
 }

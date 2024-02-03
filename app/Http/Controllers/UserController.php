@@ -12,6 +12,7 @@ use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -34,6 +35,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function create()
     {
 
@@ -48,6 +51,8 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {
 
@@ -73,6 +78,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function show($id)
     {
 
@@ -87,6 +94,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function edit($id)
     {
 
@@ -105,6 +114,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function update(Request $request, $id)
     {
 
@@ -140,6 +151,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function destroy($id)
     {
 
@@ -147,4 +160,6 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success','User Deleted succssfully');
 
     }
+
+
 }
