@@ -27,7 +27,7 @@ class ProductController extends Controller
     {
 
         $products = Product::latest()->paginate(5);
-        return view('backend.product.index',compact('products'))->with('i', (request()->input('page', 1) - 1) *5 );
+        return view('backend.products.index',compact('products'))->with('i', (request()->input('page', 1) - 1) *5 );
 
     }
 
@@ -39,7 +39,7 @@ class ProductController extends Controller
     public function create()
     {
 
-        return view('backend.product.create');
+        return view('backend.products.create');
 
     }
 
@@ -72,7 +72,7 @@ class ProductController extends Controller
     public function show(Product $products)
     {
 
-        return view('backend.product.show',compact('product'));
+        return view('backend.products.show',compact('product'));
 
     }
 
@@ -85,7 +85,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
 
-        return view('backend.product.edit',compact('product'));
+        return view('backend.products.edit',compact('product'));
 
     }
 

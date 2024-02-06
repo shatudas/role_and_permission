@@ -2,7 +2,7 @@
 
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-   
+
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
       <span class="brand-text font-weight-light">Laravel</span>
@@ -22,7 +22,7 @@
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        
+
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -32,7 +32,26 @@
                         </p>
                     </a>
                 </li>
-            
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Manage Roles
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('roles.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>View Roles</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle"></i>
@@ -50,7 +69,7 @@
                         </li>
                     </ul>
                 </li>
-        
+
             </ul>
         </nav>
 
