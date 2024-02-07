@@ -39,6 +39,7 @@
                             <div class="card-body">
                                 <form method="POST" action="{{ route('users.update',$user->id) }}" id="myForm">
                                 @csrf
+                                @method('PUT')
 
                                     <div class="form-row">
 
@@ -66,16 +67,31 @@
                                             <font style="color:red">{{ ($errors->has('confirm-password'))?($errors->first('confirm-password')):'' }}</font>
                                         </div>
 
-                                        <div class="form-group col-md-6">
+
+                                        {{-- <div class="form-group col-md-6">
                                             <label for="role"> Roles <span style="color:red;">*</span> </label>
-                                                <select name="role" class="form-control form-control-sm" multiple>
-                                                <option value=""> Select Role </option>
+                                            <select name="roles[]" multiple="multiple" class="form-control form-control-sm select2 text-dark" data-placeholder="Select Role">
                                                 @foreach ($roles as $role)
-                                                    <option value="{{ $role->name }}" > {{ $role->name }} </option>
+                                                    <option value="{{ $role }}">
+                                                        {{ $role }}
+                                                    </option>
                                                 @endforeach
                                             </select>
-                                            <font style="color:red">{{ ($errors->has('status'))?($errors->first('status')):'' }}</font>
+                                            <font style="color:red">{{ ($errors->has('role')) ? ($errors->first('role')) : '' }}</font>
+                                        </div> --}}
+
+                                        <div class="form-group col-md-6">
+                                            <label for="role"> Roles <span style="color:red;">*</span> </label>
+                                            <select name="roles[]" multiple="multiple" class="form-control form-control-sm select2 text-dark" data-placeholder="Select Role">
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role }}" {{ in_array($role, $userRole) ? 'selected' : '' }}>
+                                                        {{ $role }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <font style="color:red">{{ ($errors->has('roles')) ? ($errors->first('roles')) : '' }}</font>
                                         </div>
+
 
                                         <div class="form-group col-md-12">
                                             <input type="submit" value="Upload"  class="btn btn-primary">

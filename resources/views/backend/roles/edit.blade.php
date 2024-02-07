@@ -30,15 +30,17 @@
 
                             <div class="card-header">
                                 <h3> Update Roles
-                                    <a href="{{ route('rolse.index') }}" class=" btn btn-primary btn-sm float-right">
+                                    <a href="{{ route('roles.index') }}" class=" btn btn-primary btn-sm float-right">
                                         <i class="fa fa-list"></i>  List View
                                     </a>
                                 </h3>
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" action="{{ route('rolse.update',$$role->id) }}" id="myForm">
+                                <form method="post" action="{{ route('roles.update',$role->id) }}" id="myForm">
                                 @csrf
+                                @method('PUT')
+
 
                                     <div class="form-row">
 
@@ -48,15 +50,19 @@
                                             <font style="color:red">{{ ($errors->has('name'))?($errors->first('name')):'' }}</font>
                                         </div>
 
+
                                         <div class="form-group col-md-6">
-                                            <label for="confirm-password"> Permission <span style="color:red;">*</span> </label>
+                                            <label for="permission"> Permission <span style="color:red;">*</span> </label>
+                                            <br>
+
                                             @foreach($permission as $value)
-                                                <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
-                                                    {{ $value->name }}</label>
+                                                <input type="checkbox" name="permission[]" class="name" value="{{ $value->id }}" {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }}> {{ $value->name }}
                                                 <br/>
                                             @endforeach
+
                                             <font style="color:red">{{ ($errors->has('permission'))?($errors->first('permission')):'' }}</font>
                                         </div>
+
 
 
                                         <div class="form-group col-md-12">

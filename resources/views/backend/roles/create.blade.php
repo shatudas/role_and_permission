@@ -30,14 +30,14 @@
 
                             <div class="card-header">
                                 <h3> Create Roles
-                                    <a href="{{ route('rolse.index') }}" class=" btn btn-primary btn-sm float-right">
+                                    <a href="{{ route('roles.index') }}" class=" btn btn-primary btn-sm float-right">
                                         <i class="fa fa-list"></i> List View
                                     </a>
                                 </h3>
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" action="{{ route('rolse.store') }}" id="myForm">
+                                <form method="POST" action="{{ route('roles.store') }}" id="myForm">
                                 @csrf
 
                                     <div class="form-row">
@@ -50,11 +50,11 @@
 
                                         <div class="form-group col-md-6">
                                             <label for="confirm-password"> Permission <span style="color:red;">*</span> </label>
-                                            @foreach($permission as $value)
-                                                <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
-                                                    {{ $value->name }}</label>
-                                                <br/>
-                                            @endforeach
+                                                <br>
+                                                @foreach($permission as $value)
+                                                    <input type="checkbox" name="permission[]" value="{{ $value->id }}" class="name">{{ $value->name }}
+                                                    <br/>
+                                                @endforeach
                                             <font style="color:red">{{ ($errors->has('permission'))?($errors->first('permission')):'' }}</font>
                                         </div>
 

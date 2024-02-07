@@ -31,7 +31,7 @@ class RolesController extends Controller
      */
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id','DESC')->pagnate(5);
+        $roles = Role::orderBy('id','DESC')->paginate(5);
         return view('backend.roles.index',compact('roles'))->with('i', ($request->input('page', 1) - 1) * 5);
 
 
@@ -48,7 +48,6 @@ class RolesController extends Controller
         $permission = Permission::get();
         return view('backend.roles.create',compact('permission'));
 
-
     }
 
     /**
@@ -59,6 +58,8 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request->all());
 
         $this->validate($request, [
             'name'       =>'required|unique:roles,name',
@@ -113,7 +114,7 @@ class RolesController extends Controller
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             ->all();
 
-        return view('backend.roles.edit', compact('role','permission','permission'));
+        return view('backend.roles.edit', compact('role','permission','rolePermissions'));
 
     }
 

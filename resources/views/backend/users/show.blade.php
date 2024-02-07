@@ -31,7 +31,7 @@
                             <div class="card-header">
                                 <h3> View User
                                     <a href="{{ route('users.index') }}" class=" btn btn-primary btn-sm float-right">
-                                        <i class="fa fa-list"></i>  Previews
+                                        <i class="fa fa-list"></i>  Back
                                     </a>
                                 </h3>
                             </div>

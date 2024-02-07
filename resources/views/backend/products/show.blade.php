@@ -42,12 +42,12 @@
 
                                         <div class="form-group col-md-12">
                                             <label for="name"> Name <span style="color:red;">*</span> </label>
-                                            <span>{{ $products->name }}</span>
+                                            <span>{{ $product->name }}</span>
                                         </div>
 
                                         <div class="form-group col-md-12">
                                             <label for="email"> Roles <span style="color:red;">*</span> </label>
-                                            {!! $products->detail !!}
+                                            {!! $product->detail !!}
 
                                         </div>
 

@@ -25,7 +25,7 @@
             <div class="container-fluid mt-5">
 
                <div class="row justify-content-center">
-                    <div class="col-12">
+                    <div class="col-8">
                         <div class="card">
 
                             <div class="card-header">
@@ -42,14 +42,14 @@
 
                                     <div class="form-row">
 
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-12">
                                             <label for="name"> Name <span style="color:red;">*</span> </label>
                                             <input type="text" name="name" class="form-control form-control-sm" placeholder="Enter Name">
                                             <font style="color:red">{{ ($errors->has('name'))?($errors->first('name')):'' }}</font>
                                         </div>
 
 
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-12">
                                             <label for="detail"> Detail <span style="color:red;">*</span> </label>
                                             <textarea  name="detail" rows="10" class="form-control form-control-sm"> </textarea>
                                             <font style="color:red">{{ ($errors->has('detail'))?($errors->first('detail')):'' }}</font>

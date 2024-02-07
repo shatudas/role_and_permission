@@ -56,6 +56,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
+
         $this->validate($request,[
             'name'      => 'required',
             'email'     => 'required|email|unique:users,email',
@@ -65,10 +66,11 @@ class UserController extends Controller
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-        $user = User::create($input);
-        $user->assingRole($request->input('roles'));
 
-        return redirect()->route('users.users')->with('sucsess','User Created Successfully');
+        $user = User::create($input);
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('users.index')->with('sucsess','User Created Successfully');
 
     }
 
@@ -96,16 +98,30 @@ class UserController extends Controller
      */
 
 
+    // public function edit($id)
+    // {
+
+    //     $user = User::find($id);
+    //     $roles = Role::pluck('name','name')->all();
+    //     $userRole = $user->roles->pluck('name','name')->all();
+
+    //     return view('backend.users.edit',compact('user','roles','userRole'));
+
+    // }
+
+
     public function edit($id)
-    {
+        {
+            $user = User::find($id);
+            $roles = Role::pluck('name', 'name')->all();
+            $userRole = $user->roles->pluck('name', 'name')->all();
 
-        $user = User::find($id);
-        $roles = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->all();
+            return view('backend.users.edit', compact('user', 'roles', 'userRole'));
+        }
 
-        return view('backend.users.edit',compact('user','roles','userRole'));
 
-    }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -119,16 +135,21 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
 
-        $this->validate($request,[
-            'name'      => 'required',
-            'email'     => 'required|email|unique:users,email'.$id,
-            'password'  => 'required|same:confirm-password',
-            'roles'     => 'required'
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'roles' => 'required'
         ]);
+
 
         $input = $request->all();
 
         if(!empty($input['password'])){
+
+            $this->validate($request, [
+                'password' => 'required|same:confirm-password',
+            ]);
+
             $input['password'] = Hash::make($input['password']);
         }else{
             $input = Arr::except($input,array('password'));
@@ -141,7 +162,8 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users','index')->with('success','User Updated Successfully');
+        return redirect()->route('users.index')->with('success', 'User Updated Successfully');
+
 
     }
 

@@ -49,7 +49,7 @@
                                             <label for="email"> Roles <span style="color:red;">*</span> </label>
                                             @if(!empty($rolePermissions))
                                                 @foreach($rolePermissions as $v)
-                                                    <label class="label label-success">{{ $v->name }},</label>
+                                                    <span class="label label-success">{{ $v->name }}, </span>
                                                 @endforeach
                                             @endif
 

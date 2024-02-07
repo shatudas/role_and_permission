@@ -56,11 +56,14 @@
                                                     <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
                                                     <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
 
-                                                    <form method="POST" action="{{ route('roles.destroy', $role->id) }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
+                                                    <a >
+                                                        <form method="POST" action="{{ route('roles.destroy', $role->id) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </a>
+
 
                                                 </td>
                                             </tr>

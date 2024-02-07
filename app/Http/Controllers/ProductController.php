@@ -8,7 +8,7 @@ use App\Models\Product;
 class ProductController extends Controller
 {
 
-    function __construct()
+    function  __construct()
     {
 
     $this->middleware('permission:product-list|product-create|product-edit|product-delete',['only' => ['index','show']]);
@@ -17,6 +17,8 @@ class ProductController extends Controller
     $this->middleware('permission:product-delete', ['only' => ['destroy']]);
 
     }
+
+
 
     /**
      * Display a listing of the resource.
@@ -28,6 +30,7 @@ class ProductController extends Controller
 
         $products = Product::latest()->paginate(5);
         return view('backend.products.index',compact('products'))->with('i', (request()->input('page', 1) - 1) *5 );
+
 
     }
 
@@ -52,10 +55,12 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        $request()->validate([
-            'name'   =>'required',
-            'detail' =>'required'
+        $this->validate($request, [
+            'name'       =>'required',
+            'detail'     =>'required'
         ]);
+
+
 
         Product::create($request->all());
 
@@ -69,7 +74,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $products)
+    public function show(Product $product)
     {
 
         return view('backend.products.show',compact('product'));
@@ -102,9 +107,9 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
 
-        $request()->validate([
-            'name'   =>'required',
-            'detail' =>'required'
+        $this->validate($request, [
+            'name'       =>'required',
+            'detail'     =>'required'
         ]);
 
         $product->update($request->all());
@@ -123,8 +128,7 @@ class ProductController extends Controller
     {
 
         $product->delete();
-
-        return view('products.index')->with('success', 'Product Deleted Successfully');
+        return redirect()->route('products.index')->with('success','Product Deleted Successfully');
 
     }
 
