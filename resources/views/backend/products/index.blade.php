@@ -30,7 +30,7 @@
 
                             <div class="card-header">
                                 <h3> Product
-                                    @can('role-create')
+                                    @can('product-create')
                                         <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right">
                                             <i class="fa fa-plus-circle"></i> New Product
                                         </a>
@@ -55,14 +55,22 @@
                                                 <td>{{ $product->name }}</td>
                                                 <td>{{ $product->detail }}</td>
                                                 <td>
-                                                    <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
-                                                    <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
 
+
+                                                <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
+
+
+                                                @can('product-edit')
+                                                    <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
+                                                @endcan
+
+                                                @can('product-delete')
                                                     <form method="POST" action="{{ route('products.destroy', $product->id) }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>
                                                     </form>
+                                                @endcan
 
                                                 </td>
                                             </tr>

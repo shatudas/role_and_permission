@@ -53,16 +53,24 @@
                                                 <td>{{ ++$i }}</td>
                                                 <td>{{ $role->name }}</td>
                                                 <td>
-                                                    <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
-                                                    <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
 
-                                                    <a >
-                                                        <form method="POST" action="{{ route('roles.destroy', $role->id) }}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </form>
-                                                    </a>
+
+                                                    <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
+
+
+                                                    @can('role-edit')
+                                                        <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
+                                                    @endcan
+
+                                                    @can('role-delete')
+                                                        <a >
+                                                            <form method="POST" action="{{ route('roles.destroy', $role->id) }}">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                            </form>
+                                                        </a>
+                                                    @endcan
 
 
                                                 </td>

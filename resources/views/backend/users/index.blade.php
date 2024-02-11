@@ -30,9 +30,11 @@
 
                             <div class="card-header">
                                 <h3>Users Management
-                                    <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right">
-                                        <i class="fa fa-plus-circle"></i> New User
-                                    </a>
+                                    @can('user-create')
+                                        <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right">
+                                            <i class="fa fa-plus-circle"></i> New User
+                                        </a>
+                                    @endcan
                                 </h3>
                             </div>
 
@@ -64,16 +66,24 @@
 
 
                                                 <td>
-                                                    <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-                                                    <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
 
-                                                    <a>
-                                                        <form method="POST" action="{{ route('users.destroy', $role->id) }}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </form>
-                                                    </a>
+
+                                                    <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
+
+
+                                                    @can('user-edit')
+                                                        <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
+                                                    @endcan
+
+                                                    @can('user-delete')
+                                                        <a>
+                                                            <form method="POST" action="{{ route('users.destroy', $user->id) }}">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                            </form>
+                                                        </a>
+                                                    @endcan
 
                                                 </td>
                                             </tr>
